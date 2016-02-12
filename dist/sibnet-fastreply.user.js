@@ -188,7 +188,7 @@
 	
 //меняем цвет кнопок у формы при выборе цвета из палитры
 //а заодно меняем значение соответствующего тега в поле ввода
-	function setTextColor(picker) {
+	window.setTextColor = function(picker) {
 		 var recolor = document.querySelectorAll('.editor-button');
 		 for (var i = 0; i < recolor.length; i++) {
 			recolor[i].style.color = '#' + picker.toString();
@@ -239,23 +239,25 @@
 	}
 	document.body.appendChild(buttonCancel);
 
-
+	LoadStyles()
+	LoadButtons()
+	
 //костыль, делающий текстовое поле изменяемым в размерах в *меньшую* сторону в хроме,
 //в котором эта бага уже с начала 2012 года минимум (и до сих пор не исправлена, в феврале 2016)
-function resizableStart(e){
+function resizableStart (e){
     this.originalW = this.clientWidth;
     this.originalH = this.clientHeight;
     this.onmousemove = resizableCheck;
     this.onmouseup = this.onmouseout = resizableEnd;
 }
-function resizableCheck(e){
+function resizableCheck (e){
     if(this.clientWidth !== this.originalW || this.clientHeight !== this.originalH) {
         this.originalX = e.clientX;
         this.originalY = e.clientY;
         this.onmousemove = resizableMove;
     }
 }
-function resizableMove(e){
+function resizableMove (e){
     var newW = this.originalW + e.clientX - this.originalX,
         newH = this.originalH + e.clientY - this.originalY;
     if(newW < this.originalW){
@@ -265,17 +267,12 @@ function resizableMove(e){
         this.style.height = newH + 'px';
     }
 }
-function resizableEnd(){
+function resizableEnd (){
     this.onmousemove = this.onmouseout = this.onmouseup = null;
 }
-var els = document.getElementsByClassName('resizable');
-for(var i=0, len=els.length; i<len; ++i){
-    els[i].onmouseover = resizableStart;
-}
+var els = document.querySelector( '.resizable' );
+els.addEventListener("mouseover", resizableStart, false);
 	
-	LoadStyles()
-	LoadButtons()
-
 //init button functions (text-editor.js)
 	$(document).ready(
 		function () {
