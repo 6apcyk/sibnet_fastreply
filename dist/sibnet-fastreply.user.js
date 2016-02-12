@@ -187,7 +187,6 @@
 			recolor[i].style.color = '#' + picker.toString();
 		}
 		var match = FReply.value.match(/(\[colour=#[0-9abcdef]{6}\])([\s\S]*?)(\[\/colour\])/);
-		console.log(match[1],'--',match[2],'--',match[3]);
         if (match && match[3] == '[/colour]') {
 			FReply.value = FReply.value.replace(match[1], '[colour=#' +picker.toString()+']');
           }
