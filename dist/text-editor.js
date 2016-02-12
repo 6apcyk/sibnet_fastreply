@@ -286,7 +286,7 @@ window.editor_handle = function() {
   $('#preview_comment_eye').click(function() {
 	FReply = document.querySelector( '#fastreplyarea' );
     setsize("areaW", FReply.style.width, 60)
-	setsize("areaH", FReply.style.width, 60)
+	setsize("areaH", FReply.style.height, 60)
 	  
 	  
     var i = document.querySelector('#fastreplyarea');
