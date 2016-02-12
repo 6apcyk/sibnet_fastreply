@@ -88,7 +88,9 @@ window.editor_handle = function() {
 		    var buttonCancel = document.querySelector('#button_colorCancel');
 		    CPicker.firstChild.appendChild(buttonCancel);
 		    buttonCancel.style.visibility = 'visible';
-			CPicker.firstChild.style.boxShadow = "15px 15px 15px 0px rgba(0, 0, 0, 0.3)";
+			CPicker.firstChild.style.boxShadow = "15px -15px 15px 0px rgba(0, 0, 0, 0.3)";
+			CPicker.style.left = CPicker.style.left.slice(0,CPicker.style.left.length - 2) - 110 + "px";
+			CPicker.style.top = CPicker.style.top.slice(0,CPicker.style.top.length - 2) - 30 + "px";
 			}
 		} else {
 			return;
