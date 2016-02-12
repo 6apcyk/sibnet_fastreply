@@ -260,13 +260,11 @@ window.editor_handle = function() {
 
 	
 	function keyhandler(e){
-      console.log(e)
   	  var keyCode = e.keyCode;
 	  var modal = document.querySelector('div[class = "custom-modal custom-modal-prompt"]');
       if(keyCode == 27){
-
-	  $(".custom-modal-overlay").hide();
-        modal.parentNode.removeChild(modal);
+	    input.removeEventListener("keypress",keyhandler);
+	    buttonCANCEL.onclick();
       }
 	  if(keyCode == 13){
 	    input.removeEventListener("keypress",keyhandler);
