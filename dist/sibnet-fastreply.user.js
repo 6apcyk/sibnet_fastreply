@@ -87,7 +87,7 @@
 		'.editor-button:hover {color: red;}'+
 		'.button-tab {margin-left: '+tab+'px}'+
 		'.colorbuttons {visibility: hidden; cursor: pointer; border-radius: 4px; background-color: #FFFFFF; margin: 130px 2px 0px 2px;'+
-			'border: 1px solid #D3D3D3; box-shadow: 15px 15px 15px 0px rgba(0, 0, 0, 0.3);}'+
+			'border: 1px solid #D3D3D3; box-shadow: 15px -15px 15px 0px rgba(0, 0, 0, 0.3);}'+
 		'.colorbuttons:hover { background-color: #DDDDDD; -webkit-transition: all 0.5s ease; transition: all 0.5s ease; }'+
 		'.custom-modal-overlay {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 9998; background-color: #FFF;'+
 			'background-color: rgba(255, 255, 255, 0.2); display: none;}'+
