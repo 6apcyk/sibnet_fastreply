@@ -231,7 +231,7 @@ window.editor_handle = function() {
     input.type = 'text';
     input.className = 'modal-input';
 	input.placeholder = value;
-	input.addEventListener("keypress", keyhandler, false);
+	input.addEventListener("keydown", keyhandler, false);
     var buttonOK = document.createElement('button');
     buttonOK.innerHTML = 'OK';
     buttonOK.onclick = 	function () {
