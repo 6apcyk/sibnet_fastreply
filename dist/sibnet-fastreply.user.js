@@ -8,7 +8,6 @@
 // @downloadURL  https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/sibnet-fastreply.user.js
 //
 // @version      0.4.2
-// @require    	 http://code.jquery.com/jquery-2.2.0.min.js
 // @require    	 https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/text-editor.js
 // @require    	 https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/jscolor_mod.js
 // @include      http://forum.sibnet.ru/*
@@ -18,7 +17,14 @@
 // @grant 		 none
 // ==/UserScript==
 
-
+//запускаем jquery, который встроен в форум
+(function(document, fn) {
+    var script = document.createElement('script')
+    script.setAttribute("type", "text/javascript")
+    script.textContent = '(' + fn + ')(window, window.document, jQuery)'
+    document.body.appendChild(script) // run the script
+    document.body.removeChild(script) // clean up
+})
 
 //Размеры поля быстрого ответа в пикселах
 	W = getsize('areaW');
