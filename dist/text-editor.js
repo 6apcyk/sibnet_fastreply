@@ -126,19 +126,18 @@ window.editor_handle = function() {
 
     $("#b-video").on('click', function() {
       var sel = myEditor.selection();
-      fakePrompt('Адрес ссылки (URL):', 'http:// (video.sibnet)', false, function(url) {
-		var sibnet_video_id = sibnet_video_parser(url);
-		if (sibnet_video_id.slice(0,3) == "err") {
-			var err_code = sibnet_video_id.slice(4,7);
-			if (err_code == "dom") {
-				alert ('Для тега [video] разрешены ссылки только с video.sibnet.ru');
-			}
-			if (err_code == "ext") {
-				alert ('Неверная ссылка');
-			}
+      fakePrompt('Адрес ссылки (URL):', 'http:// (video.sibnet или youtube)', false, function(url) {
+		var youtube_id = youtube_parser(url);
+        if (youtube_id) {
+          myEditor.insert('[youtube]' + youtube_id + '[/youtube]');
         } else {
-			myEditor.insert('[video] ' + sibnet_video_id + ' [/video]');
-		}
+		  var sibnet_video_id = sibnet_video_parser(url);
+		  if (!sibnet_video_id) {
+			alert ('Неверная ссылка');
+		  } else {
+			  myEditor.insert('[video] ' + sibnet_video_id + ' [/video]');
+		  }
+        }
       });
     });
 
@@ -201,21 +200,16 @@ window.editor_handle = function() {
     return (match1&&match2) ? url : ret_code;
   }
 
+  function youtube_parser(url) {
+	var re1 = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/i;
+    var match = url.match(re1);
+    return (match&&match[7].length==11) ? match[7] : false;
+  }
 
   function sibnet_video_parser(url) {
-    var ret_code = "";
-	var re1 = new RegExp("^.*(video\.sibnet\.ru\/).*", "i");
-    var match1 = url.match(re1);
-	var re2 = new RegExp("^.*\/video([0-9]+)-.*", "i");
-	var match2 = url.match(re2);
-    if (!match1) {ret_code = "err_dom"}
-	if (match2&&match2[1].length>4&&match2[1].length<12) {
-		var isvideo = true;
-	} else {
-		var isvideo = false;
-		ret_code = "err_ext"
-	}
-	return (match1&&isvideo) ? match2[1] : ret_code;
+	var re1 = new RegExp("^.*\/video([0-9]+)-.*", "i");
+	var match = url.match(re2);
+	return (match&&match[1].length>4&&match[1].length<12)? match[1] : false;
   }
 
 
@@ -393,6 +387,17 @@ window.editor_handle = function() {
         });
       }
 
+      var matches = i.value.match(/(\[youtube\])([^\[]*)(\[\/youtube\])/g);
+      if(matches) {
+        matches.forEach(function(item, i, matches) {
+          var item_matches = item.match(/(\[youtube\])([^\[]*)(\[\/youtube\])/);
+          if (item_matches && item_matches[1] == '[youtube]' && item_matches[3] == '[/youtube]') {
+            var str = ('[youtube]'+item_matches[2]+'[/youtube]');
+            code = code.replace(str, '<iframe height="315" src="https://www.youtube.com/embed/'+item_matches[2]+'" frameborder="0" allowfullscreen></iframe>');
+          }
+        });
+      }
+	  
       var matches = code.match(/(\[url=([^\]]*)\])([^\[]*)(\[\/url\])/g);
       if(matches) {
         matches.forEach(function(item, i, matches) {
