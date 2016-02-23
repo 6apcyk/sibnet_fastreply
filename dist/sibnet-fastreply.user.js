@@ -7,7 +7,7 @@
 // @updateURL    https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/sibnet-fastreply.meta.js
 // @downloadURL  https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/sibnet-fastreply.user.js
 //
-// @version      0.4.2
+// @version      0.4.3
 // @require    	 https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/text-editor.js
 // @require    	 https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/jscolor_mod.js
 // @include      http://forum.sibnet.ru/*
@@ -101,14 +101,14 @@
 			'margin: 0 4px 0 0; -webkit-transition: all 0.5s ease; transition: all 0.5s ease;}'+
 		'.custom-modal button:focus, .custom-modal button:hover {background-color: #FFFFFF; -webkit-transition: all 0.5s ease; transition: all 0.5s ease;}'+
 		'.tab {margin-left: 40px;}'+
-		'.preview {width: 80%; display: none; text-align: left;}'+
+		'.preview {width: 85%; display: none; text-align: left;}'+
 
 		
 		'#upload_img_modal {display: none; font-size: 1.3em;}'+
 		'#upload_img_modal .or_text {margin: 10px 0;}'+
 		
 		'.VideoSibnetIframe { width:100%; }iframe[src*=\'video.sibnet.ru\'] { width: 640px; }'+
-		'embed[src*=\'video.sibnet.ru\'] { width: 640px; }';
+		'embed[src*=\'video.sibnet.ru\'] { width: 640px; }iframe[src*=\'youtube.com\'] { width: 640px; }';
 		head.appendChild(style1);
 
 
@@ -273,10 +273,5 @@ function resizableEnd (){
 var els = document.querySelector( '.resizable' );
 els.addEventListener("mouseover", resizableStart, false);
 	
-//init button functions (text-editor.js)
-	$(document).ready(
-		function () {
-			if ( $('#fastreplyarea').get(0) !== undefined ) {
-				editor_handle();
-			}
-		});
+
+editor_handle();
