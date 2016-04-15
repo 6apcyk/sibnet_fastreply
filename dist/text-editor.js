@@ -340,6 +340,20 @@ window.editor_handle = function() {
       .replace(/\[\/s\]/g, '</strike>')
       .replace(/\[quote\]/g, '<div class="quotetop">Цитата</div><div class="quotemain">')
       .replace(/\[\/quote\]/g, '</div>');
+
+	  var matches = code.match(/(\[quote name.*?\])/g);
+	  if(matches) {
+        matches.forEach(function(item, i, matches) {
+          var name_match = item.match(/name=\'(.*?)\'/);
+          var date_match = item.match(/date=\'(.*?)\'/);
+          var post_match = item.match(/post=\'(.*?)\'/);
+		  if (name_match && date_match && post_match) {
+            var str = ("[quote name='"+name_match[1]+"' date='"+date_match[1]+"' post='"+post_match[1]+"']");
+			code = code.replace(str, '<div class="quotetop">Цитата('+name_match[1]+' @ '+date_match[1]+')<a href="index.php?act=findpost&amp;pid='+
+            post_match[1]+'"><span style="color:#990037;font-size:16px;font-weight: bold;">‹</span></a></div><div class="quotemain">')
+          }
+        });
+      }
 	  
   
 	  var matches = code.match(/(\[color=#[0-9abcdef]{6}\])([\s\S]*?)(\[\/color\])/g);
