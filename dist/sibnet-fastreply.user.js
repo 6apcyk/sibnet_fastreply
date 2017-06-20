@@ -7,7 +7,7 @@
 // @updateURL    https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/sibnet-fastreply.meta.js
 // @downloadURL  https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/sibnet-fastreply.user.js
 //
-// @version      0.5.0
+// @version      0.5.1
 // @require    	 https://raw.githubusercontent.com/6apcyk/sibnet_fastreply/master/dist/jscolor_mod.js
 // @include      http://forum.sibnet.ru/*
 // @match        http://forum.sibnet.ru/*
@@ -1045,6 +1045,10 @@ window.quoting_handler = function() {
 			}
 		}
 		if (!clicked){
+			if (buttonQuote.style.visibility == 'visible'){
+				hideQuoteButton();
+				return;
+		    	}
 			if (checkSelection()){
 				sel = window.getSelection();
 				range = sel.getRangeAt(0);
@@ -1053,8 +1057,6 @@ window.quoting_handler = function() {
 				end_cont = range.endContainer;
 				er_offset = range.endOffset;
 				drawQuoteButton();
-			} else {
-				hideQuoteButton();
 			}
 		}
 	}
